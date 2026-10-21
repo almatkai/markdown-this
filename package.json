@@ -3,7 +3,7 @@
   "name": "markdown-this",
   "title": "Markdown This",
   "description": "Convert Markdown text in clipboard to HTML",
-  "icon": "command-icon.png",
+  "icon": "assets/command-icon.png",
   "author": "almatkai",
   "contributors": [
     "chihkang"
