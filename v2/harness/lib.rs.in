@@ -1,0 +1,11 @@
+//! HEADLESS: actual pinned common + SDK, extension-local adapter, inert Tauri.
+pub mod native_core {
+    #[path = "@@ENGINE@@/fixtures/beta/src-tauri/src/native_core/common.rs"]
+    pub mod common;
+    pub mod extensions {
+        #[path = "@@ENGINE@@/adapter.rs"]
+        pub mod markdown_this;
+        #[path = "@@ENGINE@@/fixtures/beta/src-tauri/src/native_core/extensions/v2_sdk.rs"]
+        pub mod v2_sdk;
+    }
+}

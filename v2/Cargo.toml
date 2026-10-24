@@ -1,0 +1,18 @@
+[package]
+name = "tezbar-markdown-this"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.85"
+license = "MIT AND BSD-3-Clause AND Apache-2.0 AND Zlib AND Unicode-3.0"
+description = "Offline native Markdown This conversion engine and compiled beta adapter"
+readme = "README.md"
+repository = "https://github.com/almatkai/markdown-this"
+include = ["/src/**", "/licenses/**", "/examples/**", "/data/**", "/assets/**", "/adapter.rs", "/extension.json", "/PROVENANCE.json", "/tests/**", "/oracle/**", "/fixtures/**", "/scripts/**", "/harness/**", "/README.md", "/INTEGRATION.md", "/NOTICES.md", "/VALIDATION.md", "/LICENSE", "/Cargo.lock", "/Cargo.toml", "/.gitignore"]
+
+[dependencies]
+serde = { version = "=1.0.228", features = ["derive"] }
+serde_json = "=1.0.145"
+regress = "=0.10.3"
+linkify = "=0.10.0"
+
+[dev-dependencies]

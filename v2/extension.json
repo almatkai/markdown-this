@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 2,
+  "id": "com.tezbar.native.markdown-this",
+  "slug": "markdown-this",
+  "name": "Markdown This",
+  "version": "0.1.0",
+  "description": "Convert Markdown text in clipboard to HTML. Based on Markdown This by aravindballa, with contributor chihkang.",
+  "runtime": "rust",
+  "replaces": ["raycast.markdown-this"],
+  "icon": "/extensions/icons/markdown-this.png",
+  "platforms": ["macOS", "Windows"],
+  "preferences": [],
+  "commands": [
+    {
+      "name": "index",
+      "title": "Convert to HTML",
+      "description": "Convert markdown text in clipboard to HTML",
+      "mode": "no-view",
+      "platforms": ["macOS", "Windows"],
+      "runtime": "rust"
+    }
+  ],
+  "verification": [
+    {"platform": "macOS", "state": "not-run", "note": "Real host UI and clipboard format verification required after registration and rebuild."},
+    {"platform": "Windows", "state": "not-run", "note": "Real host UI and clipboard format verification required after registration and rebuild."}
+  ]
+}

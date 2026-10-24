@@ -1,0 +1,75 @@
+//! HEADLESS integration: common.rs, SDK and native.rs are byte-exact beta fixtures.
+//! Registration and registry stubs are labeled below and implement no OS calls.
+pub mod native_core {
+    #[path = "@@ENGINE@@/fixtures/beta/src-tauri/src/native_core/common.rs"]
+    pub mod common;
+    pub mod extensions {
+        use crate::native_core::common::{CoreContext, CoreResult};
+        use serde_json::{json, Value};
+        use std::sync::{Arc, Mutex};
+        #[path = "@@ENGINE@@/adapter.rs"]
+        pub mod markdown_this;
+        #[path = "@@ENGINE@@/fixtures/beta/src-tauri/src/native_core/extensions/native.rs"]
+        mod native;
+        #[path = "@@ENGINE@@/fixtures/beta/src-tauri/src/native_core/extensions/v2_sdk.rs"]
+        pub mod v2_sdk;
+        // HEADLESS STUB: equivalent proposed runtime registration, not a host patch.
+        mod v2_runtime {
+            use super::*;
+            pub fn slug(id: &str) -> Option<&str> {
+                match id {
+                    "com.tezbar.native.markdown-this"
+                    | "raycast.markdown-this"
+                    | "markdown-this" => Some("markdown-this"),
+                    _ => None,
+                }
+            }
+            pub fn supports(id: &str, command: &str) -> bool {
+                slug(id).is_some() && markdown_this::commands().contains(&command)
+            }
+            pub async fn handle(
+                ctx: &CoreContext,
+                _slug: &str,
+                command: &str,
+                operation: &str,
+                payload: &Value,
+                state: &mut Value,
+            ) -> CoreResult {
+                markdown_this::handle(ctx, command, operation, payload, state).await
+            }
+        }
+        // HEADLESS STUB: in-memory installation record, no real profile or ledger.
+        mod registry {
+            use super::*;
+            pub fn installed_command(_ctx: &CoreContext, id: &str, command: &str) -> Option<Value> {
+                v2_runtime::supports(id, command).then(|| json!({"fixture":true}))
+            }
+            pub fn preferences(_extension: &Value, _command: Option<&str>) -> CoreResult {
+                Ok(json!({"preferences":{}}))
+            }
+        }
+        #[derive(Default)]
+        pub struct SessionHarness {
+            sessions: native::NativeSessions,
+            files: Arc<Mutex<()>>,
+        }
+        impl SessionHarness {
+            pub async fn dispatch(
+                &self,
+                ctx: &CoreContext,
+                channel: &str,
+                body: Value,
+            ) -> Option<CoreResult> {
+                self.sessions
+                    .handle(ctx, &self.files, channel, &[body])
+                    .await
+            }
+            pub async fn clear(&self) {
+                self.sessions.clear().await;
+            }
+            pub async fn clear_slug(&self) {
+                self.sessions.clear_slug("markdown-this").await;
+            }
+        }
+    }
+}
