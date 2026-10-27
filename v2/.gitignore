@@ -1,0 +1,4 @@
+/target/
+/work/
+!oracle/vendor/**/dist/
+!oracle/vendor/**/dist/**

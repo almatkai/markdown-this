@@ -72,3 +72,5 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ---
 
 Made with ❤️ for the Raycast community
+
+Native V2 Rust implementation: [v2/README.md](v2/README.md).

@@ -1,0 +1,18 @@
+[package]
+name = "beta-session-fixture"
+version = "0.0.0"
+edition = "2021"
+rust-version = "1.85"
+publish = false
+[lib]
+path = "lib.rs"
+test = false
+doctest = false
+[dependencies]
+tezbar-markdown-this = { path = "../engine" }
+serde_json = "=1.0.145"
+tokio = { version = "=1.47.1", features = ["macros", "rt-multi-thread", "sync", "time"] }
+tempfile = "=3.23.0"
+log = "=0.4.28"
+uuid = { version = "=1.18.1", features = ["v4"] }
+tauri = { path = "../tauri" }

@@ -1,0 +1,9 @@
+[package]
+name = "tauri"
+version = "0.0.0"
+edition = "2021"
+publish = false
+[lib]
+path = "lib.rs"
+[dependencies]
+serde_json = "=1.0.145"

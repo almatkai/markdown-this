@@ -1,0 +1,16 @@
+[package]
+name = "markdown-this-beta-headless"
+version = "0.0.0"
+edition = "2021"
+rust-version = "1.85"
+publish = false
+[lib]
+path = "lib.rs"
+[dependencies]
+tezbar-markdown-this = { path = "engine" }
+serde_json = "=1.0.145"
+tokio = { version = "=1.47.1", features = ["macros", "rt-multi-thread", "sync", "time"] }
+tempfile = "=3.23.0"
+log = "=0.4.28"
+tauri = { path = "tauri" }
+beta-session-fixture = { path = "session" }
